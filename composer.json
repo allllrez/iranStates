@@ -10,21 +10,26 @@
         "php": ">=8.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0",
+        "orchestra/testbench": "^9.9"
     },
 
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Alrez\\IranProvinces\\": "src/"
+            "Alrez\\IranProvinces\\": "src/",
+            "Alrez\\IranProvinces\\Database\\": "src/database/"
         }
     },
-    "authors": [
-        {
-            "name": "alrez",
-            "email": "anabestanireza@yahoo.com"
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
         }
-    ],
+    },
+    "authors": [{
+        "name": "alrez",
+        "email": "anabestanireza@yahoo.com"
+    }],
     "keywords": [
         "laravel",
         "php",
