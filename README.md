@@ -1,17 +1,16 @@
-   ```md
-   # Laravel City-State Package
-   ## Installation
+# Laravel City & State Management Package
+
+This package provides a simple and efficient way to manage cities and states in Laravel projects.
+
+## Features
+
+- Manage cities and states with predefined models and controllers.
+- Easily seed data for Iranian cities and states.
+- Supports multilingual city and state names.
+- Extensible traits and services for custom functionality.
+
+## Installation
+
+1. Install the package via Composer:
    ```bash
-   composer require yourname/laravel-city-state
-   php artisan migrate
-   php artisan db:seed --class=CityStateSeeder
-   ```
-   ## Usage
-   Publish configuration:
-   ```bash
-   php artisan vendor:publish --tag=city-state-config
-   ```
-   ## API Endpoints
-   - `/cities` - Get all cities
-   - `/states` - Get all states
-   ```
+   composer require alrez/iran-states
