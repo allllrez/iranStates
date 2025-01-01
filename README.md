@@ -1,55 +1,125 @@
-# Laravel Provinces and Cities Management Package
+# Iran Provinces for Laravel
+<p align="center">
+<a href="https://packagist.org/packages/alrez/iran-provinces"><img src="https://img.shields.io/packagist/v/alrez/iran-provinces" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/alrez/iran-provinces"><img src="https://img.shields.io/packagist/l/alrez/iran-provinces" alt="License"></a>
+</p>
 
-This package provides an easy-to-use solution for managing provinces and cities in Laravel projects. It includes database migrations, seeders, models, and publishable controllers to allow seamless integration into your Laravel applications. You can also use custom commands for installation and setup.
+A Laravel package for managing Iran's provinces (states) and cities. This package provides a complete list of Iran's provinces and their cities, with easy-to-use models and migrations.
 
----
+یک پکیج لاراول برای مدیریت استان‌ها و شهرهای ایران. این پکیج شامل لیست کامل استان‌ها و شهرهای ایران به همراه مدل‌ها و مایگریشن‌های آماده است.
 
-## Features
-- Manage provinces and cities with pre-filled data.
-- Publishable models, controllers, and configuration files.
-- Ready-to-use migrations and seeders.
-- Custom commands for installation and setup.
-- Unit-tested for reliability.
+## Features | ویژگی‌ها
 
----
+- Complete list of Iran's provinces and cities | لیست کامل استان‌ها و شهرهای ایران
+- Ready-to-use models with relationships | مدل‌های آماده با روابط از پیش تعریف شده
+- Database migrations and seeders | مایگریشن و سیدر دیتابیس
+- Easy to install and use | نصب و استفاده آسان
+- Fully tested | تست شده به صورت کامل
 
-## Installation
+## Installation | نصب
 
-1. Install the package via Composer:
-   `composer require alrez/iranprovinces`
+You can install the package via composer | نصب از طریق کامپوزر:
 
-2. Publish the configuration file, controllers, and models:
-   `php artisan vendor:publish --tag=iranprovinces`
+```bash
+composer require alrez/iran-provinces
+```
 
-3. Run the installation command to set up the database:
-   `php artisan iranprovinces:install`
+## Configuration | پیکربندی
 
----
+1. Publish the package assets | انتشار فایل‌های پکیج:
+```bash
+php artisan vendor:publish --tag=iran-provinces
+```
 
-## Setup and Configuration
+2. Run the migrations | اجرای مایگریشن‌ها:
+```bash
+php artisan migrate
+```
 
-### Publishing Assets
-After running the `vendor:publish` command, the following files will be available for customization:
-- `config/iranprovinces.php`
-- Controllers: `CityController`, `StateController`
-- Models: `City`, `State`
+3. Seed the database | وارد کردن داده‌های اولیه:
+```bash
+php artisan db:seed --class=StatesTableSeeder
+php artisan db:seed --class=CitiesTableSeeder
+```
 
-### Database Setup
-The `iranprovinces:install` command will:
-- Publish migrations to your `database/migrations` folder.
-- Seed the provinces and cities data from the JSON files.
+## Usage | نحوه استفاده
 
-### Customizing Configuration
-The configuration file (`config/iranprovinces.php`) allows you to set:
-- Default models for cities and states.
-- Additional configurations for your application.
+### Get all provinces | دریافت همه استان‌ها
+```php
+use Alrez\IranProvinces\Models\State;
 
----
+$states = State::all();
+```
 
-## Usage
+### Get cities of a province | دریافت شهرهای یک استان
+```php
+$state = State::find(1);
+$cities = $state->cities;
+```
 
-### Models and Relationships
-- `State` model has a `hasMany` relationship with `City`:
-  ```php
-  $state = State::find(1);
-  $cities = $state->cities;
+### Get province of a city | دریافت استان یک شهر
+```php
+use Alrez\IranProvinces\Models\City;
+
+$city = City::find(1);
+$state = $city->state;
+```
+
+### Using the controllers | استفاده از کنترلرها
+The package includes two controllers that you can use or extend:
+
+```php
+// Get all states
+Route::get('/states', [StateController::class, 'index']);
+
+// Get cities of a state
+Route::get('/cities/{state_id}', [CityController::class, 'getCitiesByState']);
+```
+
+## Models | مدل‌ها
+
+### State
+```php
+// Available fields
+id    // Province ID
+name  // Province name in Persian
+slug  // URL-friendly version of name
+```
+
+### City
+```php
+// Available fields
+id        // City ID
+state_id  // Related province ID
+name      // City name in Persian
+slug      // URL-friendly version of name
+```
+
+## Database Structure | ساختار دیتابیس
+
+### states table
+- `id` - bigint(20)
+- `name` - varchar(255)
+- `slug` - varchar(255)
+
+### cities table
+- `id` - bigint(20)
+- `state_id` - bigint(20) foreign key
+- `name` - varchar(255)
+- `slug` - varchar(255)
+
+## Contributing | مشارکت
+
+Thank you for considering contributing to Iran Provinces! You can submit your contributions through Pull Requests.
+
+از مشارکت شما در توسعه این پکیج استقبال می‌کنیم! می‌توانید مشارکت خود را از طریق Pull Request ارسال کنید.
+
+## License | لایسنس
+
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+## Support | پشتیبانی
+
+If you discover any security-related issues, please email anabestanireza@yahoo.com instead of using the issue tracker.
+
+اگر مشکل امنیتی پیدا کردید، لطفاً به جای استفاده از issue tracker، به ایمیل anabestanireza@yahoo.com اطلاع دهید.
