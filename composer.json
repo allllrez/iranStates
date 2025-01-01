@@ -2,6 +2,9 @@
     "name": "alrez/iran_provinces",
     "description": "A package for managing provinces and cities of Iran in Laravel.",
     "type": "library",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+
     "require": {
         "laravel/framework": "^10.0|^11.0",
         "php": ">=8.0"
@@ -22,7 +25,6 @@
             "email": "anabestanireza@yahoo.com"
         }
     ],
-    "minimum-stability": "stable",
     "keywords": [
         "laravel",
         "php",
