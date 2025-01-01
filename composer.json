@@ -1,0 +1,33 @@
+{
+    "name": "alrez/iran_provinces",
+    "description": "A package for managing provinces and cities of Iran in Laravel.",
+    "type": "library",
+    "require": {
+        "laravel/framework": "^10.0|^11.0",
+        "php": ">=8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.0"
+    },
+
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Alrez\\IranProvinces\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "alrez",
+            "email": "anabestanireza@yahoo.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "keywords": [
+        "laravel",
+        "php",
+        "iran",
+        "iran-states",
+        "iran-cities"
+    ]
+}
