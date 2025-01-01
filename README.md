@@ -1,237 +1,173 @@
-# Iran Provinces | استان‌های ایران
-
-<p align="center">
-<img src="https://img.shields.io/badge/license-MIT-green" alt="License">
-<img src="https://img.shields.io/badge/PHP-%3E%3D8.0-blue" alt="PHP Version">
-<img src="https://img.shields.io/badge/Laravel-%5E10.0-red" alt="Laravel Version">
-</p>
+# پکیج استان‌ها و شهرهای ایران برای لاراول
 
 <div dir="rtl">
 
-# پکیج استان‌های ایران برای لاراول
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-8892BF.svg)](https://www.php.net/)
 
-یک پکیج لاراول برای مدیریت استان‌ها و شهرهای ایران. این پکیج شامل لیست کامل استان‌ها و شهرهای ایران به همراه مدل‌ها و مایگریشن‌های آماده است.
-
-## ویژگی‌ها
-- لیست کامل استان‌ها و شهرهای ایران
-- مدل‌های آماده با روابط از پیش تعریف شده
-- مایگریشن و سیدر دیتابیس
-- نصب و استفاده آسان
-- تست شده به صورت کامل
+## درباره پکیج
+این پکیج برای مدیریت استان‌ها و شهرهای ایران در فریم‌ورک لاراول طراحی شده است. با استفاده از این پکیج می‌توانید به راحتی به لیست استان‌ها و شهرهای ایران دسترسی داشته باشید.
 
 ## نصب
 
-نصب از طریق کامپوزر:
+برای نصب از طریق کامپوزر:
+
 ```bash
-composer require alrez/iran-provinces
+composer require alrez/iran-states
 ```
 
-## پیکربندی
+لاراول به صورت خودکار پکیج را شناسایی و نصب می‌کند. نیازی به ثبت دستی سرویس پروایدر نیست.
 
-1. انتشار فایل‌های پکیج:
+## انتشار فایل‌های پکیج
+
+برای انتشار همه فایل‌ها:
 ```bash
-php artisan vendor:publish --tag=iran-provinces
+php artisan vendor:publish --provider="Alrez\IranStates\IranStatesServiceProvider"
 ```
 
-2. اجرای مایگریشن‌ها:
+یا انتشار به صورت جداگانه:
+
+برای فایل‌های اصلی (کانفیگ، کنترلرها و JSON):
 ```bash
-php artisan migrate
+php artisan vendor:publish --tag=iran-states
 ```
 
-3. وارد کردن داده‌های اولیه:
+برای مایگریشن‌ها:
 ```bash
-php artisan db:seed --class=StatesTableSeeder
-php artisan db:seed --class=CitiesTableSeeder
+php artisan vendor:publish --tag=migrations
 ```
 
-## نحوه استفاده
+برای سیدرها:
+```bash
+php artisan vendor:publish --tag=seeders
+```
 
-### دریافت همه استان‌ها
+## استفاده
+
+### مدل‌ها
 ```php
-use Alrez\IranProvinces\Models\State;
+use Alrez\IranStates\Models\State;
+use Alrez\IranStates\Models\City;
 
+// دریافت همه استان‌ها
 $states = State::all();
-```
 
-### دریافت شهرهای یک استان
-```php
+// دریافت شهرهای یک استان
 $state = State::find(1);
 $cities = $state->cities;
-```
 
-### دریافت استان یک شهر
-```php
-use Alrez\IranProvinces\Models\City;
-
+// دریافت استان یک شهر
 $city = City::find(1);
 $state = $city->state;
 ```
 
-### استفاده از کنترلرها
+### سرویس
 ```php
-// دریافت همه استان‌ها
-Route::get('/states', [StateController::class, 'index']);
+use Alrez\IranStates\Services\CityStateService;
 
-// دریافت شهرهای یک استان
-Route::get('/cities/{state_id}', [CityController::class, 'getCitiesByState']);
+$service = new CityStateService();
+$statesWithCities = $service->getAllStatesWithCities();
 ```
 
-## مدل‌ها
-
-### استان (State)
+### تریت
 ```php
-// فیلدهای موجود
-id        // شناسه استان
-name      // نام استان به فارسی
-slug      // نام انگلیسی برای URL
+use Alrez\IranStates\Traits\HasCitiesAndStates;
+
+class YourModel
+{
+    use HasCitiesAndStates;
+}
+
+// استفاده
+$model = new YourModel();
+$states = $model->getStates();
+$cities = $model->getCitiesByState($stateId);
 ```
-
-### شهر (City)
-```php
-// فیلدهای موجود
-id        // شناسه شهر
-state_id  // شناسه استان مربوطه
-name      // نام شهر به فارسی
-slug      // نام انگلیسی برای URL
-```
-
-## ساختار دیتابیس
-
-### جدول استان‌ها (states)
-- `id` - bigint(20)
-- `name` - varchar(255)
-- `slug` - varchar(255)
-
-### جدول شهرها (cities)
-- `id` - bigint(20)
-- `state_id` - bigint(20) foreign key
-- `name` - varchar(255)
-- `slug` - varchar(255)
-
-## مشارکت
-
-از مشارکت شما در توسعه این پکیج استقبال می‌کنیم! می‌توانید مشارکت خود را از طریق Pull Request ارسال کنید.
-
-## لایسنس
-
-این پکیج تحت لایسنس MIT منتشر شده است. برای اطلاعات بیشتر [فایل لایسنس](LICENSE.md) را مطالعه کنید.
-
-## پشتیبانی
-
-اگر مشکل امنیتی پیدا کردید، لطفاً به جای استفاده از issue tracker، به ایمیل anabestanireza@yahoo.com اطلاع دهید.
 
 </div>
 
 ---
 
-# English Documentation
+# Iran States Package for Laravel
 
-A Laravel package for managing Iran's provinces (states) and cities. This package provides a complete list of Iran's provinces and their cities, with easy-to-use models and migrations.
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D8.0-8892BF.svg)](https://www.php.net/)
 
-## Features
-- Complete list of Iran's provinces and cities
-- Ready-to-use models with relationships
-- Database migrations and seeders
-- Easy to install and use
-- Fully tested
+## About
+This package provides a comprehensive solution for managing Iran's states and cities in Laravel applications. It offers easy access to a complete list of Iran's states and their corresponding cities.
 
 ## Installation
 
-You can install the package via composer:
+Install via Composer:
+
 ```bash
-composer require alrez/iran-provinces
+composer require alrez/iran-states
 ```
 
-## Configuration
+Laravel will automatically discover and register the package. No manual service provider registration is needed.
 
-1. Publish the package assets:
+## Publishing Package Files
+
+To publish all files:
 ```bash
-php artisan vendor:publish --tag=iran-provinces
+php artisan vendor:publish --provider="Alrez\IranStates\IranStatesServiceProvider"
 ```
 
-2. Run the migrations:
+Or publish separately:
+
+For main files (config, controllers, and JSON):
 ```bash
-php artisan migrate
+php artisan vendor:publish --tag=iran-states
 ```
 
-3. Seed the database:
+For migrations:
 ```bash
-php artisan db:seed --class=StatesTableSeeder
-php artisan db:seed --class=CitiesTableSeeder
+php artisan vendor:publish --tag=migrations
+```
+
+For seeders:
+```bash
+php artisan vendor:publish --tag=seeders
 ```
 
 ## Usage
 
-### Get all provinces
+### Models
 ```php
-use Alrez\IranProvinces\Models\State;
+use Alrez\IranStates\Models\State;
+use Alrez\IranStates\Models\City;
 
+// Get all states
 $states = State::all();
-```
 
-### Get cities of a province
-```php
+// Get cities of a state
 $state = State::find(1);
 $cities = $state->cities;
-```
 
-### Get province of a city
-```php
-use Alrez\IranProvinces\Models\City;
-
+// Get state of a city
 $city = City::find(1);
 $state = $city->state;
 ```
 
-### Using the controllers
+### Service
 ```php
-// Get all states
-Route::get('/states', [StateController::class, 'index']);
+use Alrez\IranStates\Services\CityStateService;
 
-// Get cities of a state
-Route::get('/cities/{state_id}', [CityController::class, 'getCitiesByState']);
+$service = new CityStateService();
+$statesWithCities = $service->getAllStatesWithCities();
 ```
 
-## Models
-
-### State
+### Trait
 ```php
-// Available fields
-id    // Province ID
-name  // Province name in Persian
-slug  // URL-friendly version of name
+use Alrez\IranStates\Traits\HasCitiesAndStates;
+
+class YourModel
+{
+    use HasCitiesAndStates;
+}
+
+// Usage
+$model = new YourModel();
+$states = $model->getStates();
+$cities = $model->getCitiesByState($stateId);
 ```
-
-### City
-```php
-// Available fields
-id        // City ID
-state_id  // Related province ID
-name      // City name in Persian
-slug      // URL-friendly version of name
-```
-
-## Database Structure
-
-### states table
-- `id` - bigint(20)
-- `name` - varchar(255)
-- `slug` - varchar(255)
-
-### cities table
-- `id` - bigint(20)
-- `state_id` - bigint(20) foreign key
-- `name` - varchar(255)
-- `slug` - varchar(255)
-
-## Contributing
-
-Thank you for considering contributing to Iran Provinces! You can submit your contributions through Pull Requests.
-
-## License
-
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
-
-## Support
-
-If you discover any security-related issues, please email anabestanireza@yahoo.com instead of using the issue tracker.

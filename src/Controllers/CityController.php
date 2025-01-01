@@ -2,7 +2,9 @@
 
 namespace Alrez\IranStates\Controllers;
 
-use Alrez\IranProvinces\Models\City;
+use Alrez\IranStates\Models\City;
+
+
 
 
 
