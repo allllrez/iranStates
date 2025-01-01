@@ -154,6 +154,7 @@ class ComposerStaticInit204e67a4b2df9bb87001f9bde07d0d48
         ),
         'A' => 
         array (
+            'Alrez\\IranProvinces\\Tests\\' => 26,
             'Alrez\\IranProvinces\\' => 20,
         ),
     );
@@ -438,6 +439,10 @@ class ComposerStaticInit204e67a4b2df9bb87001f9bde07d0d48
         'Brick\\Math\\' => 
         array (
             0 => __DIR__ . '/..' . '/brick/math/src',
+        ),
+        'Alrez\\IranProvinces\\Tests\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/tests',
         ),
         'Alrez\\IranProvinces\\' => 
         array (

@@ -4,6 +4,7 @@
     "type": "library",
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "version": "1.0.0",
 
     "require": {
         "laravel/framework": "^10.0|^11.0",
@@ -19,6 +20,13 @@
             "Alrez\\IranProvinces\\": "src/"
         }
     },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alrez\\IranProvinces\\IranProvincesServiceProvider"
+            ]
+        }
+    },
     "authors": [
         {
             "name": "alrez",
@@ -31,5 +39,17 @@
         "iran",
         "iran-states",
         "iran-cities"
-    ]
+    ],
+    "autoload-dev": {
+        "psr-4": {
+            "Alrez\\IranProvinces\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    }
 }

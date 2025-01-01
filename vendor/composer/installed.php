@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'alrez/iran_provinces',
-        'pretty_version' => 'dev-main',
-        'version' => 'dev-main',
-        'reference' => '1ed945b66ee1a0e27ce5787b995e3428448107de',
+        'pretty_version' => '1.0.0',
+        'version' => '1.0.0.0',
+        'reference' => NULL,
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'alrez/iran_provinces' => array(
-            'pretty_version' => 'dev-main',
-            'version' => 'dev-main',
-            'reference' => '1ed945b66ee1a0e27ce5787b995e3428448107de',
+            'pretty_version' => '1.0.0',
+            'version' => '1.0.0.0',
+            'reference' => NULL,
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
