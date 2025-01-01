@@ -3,12 +3,11 @@
 namespace Tests\Unit;
 
 use Orchestra\Testbench\TestCase;
-use Illuminate\Support\Facades\Artisan;
-use Alrez\IranProvinces\Models\City;
-use Alrez\IranProvinces\Models\State;
-use Alrez\IranProvinces\IranStatesServiceProvider;
-use Alrez\IranProvinces\Database\Seeders\StatesTableSeeder;
-use Alrez\IranProvinces\Database\Seeders\CitiesTableSeeder;
+use Alrez\IranStates\Models\City;
+use Alrez\IranStates\Models\State;
+use Alrez\IranStates\IranStatesServiceProvider;
+use Alrez\IranStates\Database\Seeders\StatesTableSeeder;
+use Alrez\IranStates\Database\Seeders\CitiesTableSeeder;
 
 class InstallationTest extends TestCase
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Alrez\IranProvinces\Console;
+namespace Alrez\IranStates\Console;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;

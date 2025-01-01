@@ -1,6 +1,6 @@
 <?php
 
-namespace Alrez\IranProvinces\Models;
+namespace Alrez\IranStates\Models;
 
 use Illuminate\Database\Eloquent\Model;
 

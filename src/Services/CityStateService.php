@@ -1,10 +1,10 @@
 <?php
 
 // src/Services/CityStateService.php
-namespace Alrez\IranProvinces\Services;
+namespace Alrez\IranStates\Services;
 
-use Alrez\IranProvinces\Models\State;
-use Alrez\IranProvinces\Models\City;
+use Alrez\IranStates\Models\State;
+use Alrez\IranStates\Models\City;
 
 class CityStateService
 {

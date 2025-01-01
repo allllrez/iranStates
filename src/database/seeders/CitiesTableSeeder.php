@@ -1,6 +1,6 @@
 <?php
 
-namespace Alrez\IranProvinces\Database\Seeders;
+namespace Alrez\IranStates\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;

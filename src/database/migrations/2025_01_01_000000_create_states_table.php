@@ -1,6 +1,6 @@
 <?php
 
-namespace Alrez\IranProvinces\database\migrations;
+namespace Alrez\IranStates\database\migrations;
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;

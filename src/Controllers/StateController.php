@@ -1,10 +1,11 @@
 <?php
 
-namespace App\CityState\Controllers;
+namespace Alrez\IranStates\Controllers;
 
-namespace App\CityState\Controllers;
+use Alrez\IranProvinces\Models\State;
 
-use App\CityState\Models\State;
+
+
 
 class StateController
 {

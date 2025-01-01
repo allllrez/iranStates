@@ -1,7 +1,8 @@
 {
-    "name": "alrez/iran_provinces",
+    "name": "alrez/iran-states",
     "description": "A package for managing provinces and cities of Iran in Laravel.",
     "type": "library",
+    "version": "1.0.0",
     "minimum-stability": "dev",
     "prefer-stable": true,
 
@@ -17,13 +18,20 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Alrez\\IranProvinces\\": "src/",
-            "Alrez\\IranProvinces\\Database\\": "src/database/"
+            "Alrez\\IranStates\\": "src/",
+            "Alrez\\IranStates\\Database\\": "src/database/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Alrez\\IranStates\\IranStatesServiceProvider"
+            ]
         }
     },
     "authors": [{

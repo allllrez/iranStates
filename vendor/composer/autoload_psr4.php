@@ -90,6 +90,6 @@ return array(
     'Carbon\\Doctrine\\' => array($vendorDir . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine'),
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
-    'Alrez\\IranProvinces\\Database\\' => array($baseDir . '/src/database'),
-    'Alrez\\IranProvinces\\' => array($baseDir . '/src'),
+    'Alrez\\IranStates\\Database\\' => array($baseDir . '/src/database'),
+    'Alrez\\IranStates\\' => array($baseDir . '/src'),
 );

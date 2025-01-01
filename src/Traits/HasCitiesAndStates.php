@@ -1,9 +1,9 @@
 <?php
 
-namespace Alrez\IranProvinces\Traits;
+namespace Alrez\IranStates\Traits;
 
-use Alrez\IranProvinces\Models\City;
-use Alrez\IranProvinces\Models\State;
+use Alrez\IranStates\Models\City;
+use Alrez\IranStates\Models\State;
 
 trait HasCitiesAndStates
 {
