@@ -1,7 +1,7 @@
 # Iran Provinces for Laravel
 
 <p align="center">
-<a href="https://github.com/alrez/iran-provinces/blob/master/LICENSE"><img src="https://img.shields.io/github/license/alrez/iran-provinces" alt="License"></a>
+<img src="https://img.shields.io/badge/license-MIT-green" alt="License">
 <img src="https://img.shields.io/badge/PHP-%3E%3D8.0-blue" alt="PHP Version">
 <img src="https://img.shields.io/badge/Laravel-%5E10.0-red" alt="Laravel Version">
 </p>
