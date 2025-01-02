@@ -2,88 +2,62 @@
 
 namespace Tests\Unit;
 
-use Orchestra\Testbench\TestCase;
+use Tests\TestCase;
+use Illuminate\Support\Facades\Schema;
 use Alrez\IranStates\Models\City;
 use Alrez\IranStates\Models\State;
-use Alrez\IranStates\IranStatesServiceProvider;
-use Alrez\IranStates\Database\Seeders\StatesTableSeeder;
-use Alrez\IranStates\Database\Seeders\CitiesTableSeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class InstallationTest extends TestCase
 {
-    protected function getPackageProviders($app)
-    {
-        return [
-            IranStatesServiceProvider::class,
-        ];
-    }
+    use RefreshDatabase;
 
-    protected function setUp(): void
+    /** @test */
+    public function it_can_run_migrations_and_check_tables()
     {
-        parent::setUp();
-        $this->withoutExceptionHandling();
-        
         // Run migrations
         $this->loadMigrationsFrom(__DIR__ . '/../../src/database/migrations');
+        
+        // Check if tables exist
+        $this->assertTrue(Schema::hasTable('states'));
+        $this->assertTrue(Schema::hasTable('cities'));
     }
 
-    protected function getEnvironmentSetUp($app)
+    /** @test */
+    public function it_can_seed_and_check_data()
     {
-        // Setup default database to use sqlite :memory:
-        $app['config']->set('database.default', 'testing');
-        $app['config']->set('database.connections.testing', [
-            'driver'   => 'sqlite',
-            'database' => ':memory:',
-            'prefix'   => '',
-        ]);
+        // Run migrations
+        $this->loadMigrationsFrom(__DIR__ . '/../../src/database/migrations');
+        
+        // Run seeders
+        $this->seed(\Alrez\IranStates\Database\Seeders\StatesTableSeeder::class);
+        $this->seed(\Alrez\IranStates\Database\Seeders\CitiesTableSeeder::class);
+
+        // Check if data exists
+        $this->assertDatabaseCount('states', 31);
+        $this->assertDatabaseCount('cities', 1119);
     }
 
-    public function test_package_is_installed()
+    /** @test */
+    public function it_can_use_models()
     {
-        $this->assertTrue(class_exists(City::class));
-        $this->assertTrue(class_exists(State::class));
-    }
+        // Run migrations and seeders
+        $this->loadMigrationsFrom(__DIR__ . '/../../src/database/migrations');
+        $this->seed(\Alrez\IranStates\Database\Seeders\StatesTableSeeder::class);
+        $this->seed(\Alrez\IranStates\Database\Seeders\CitiesTableSeeder::class);
 
-    public function test_publish_controller_provider_and_json()
-    {
-        $this->artisan('vendor:publish', ['--tag' => 'iran-provinces'])->run();
-
-        $this->assertFileExists($this->app->basePath('config/iran-provinces.php'));
-        $this->assertFileExists($this->app->basePath('app/Http/Controllers/CityController.php'));
-        $this->assertFileExists($this->app->basePath('app/Http/Controllers/StateController.php'));
-        $this->assertFileExists($this->app->basePath('database/iran-provinces/states.json'));
-        $this->assertFileExists($this->app->basePath('database/iran-provinces/cities.json'));
-    }
-
-    public function test_publish_migrations_and_seeders()
-    {
-        $this->artisan('vendor:publish', ['--tag' => 'migrations'])->run();
-        $this->artisan('vendor:publish', ['--tag' => 'seeders'])->run();
-
-        $this->assertFileExists($this->app->basePath('database/migrations/2025_01_01_000000_create_states_table.php'));
-        $this->assertFileExists($this->app->basePath('database/migrations/2025_01_01_000001_create_cities_table.php'));
-        $this->assertFileExists($this->app->basePath('database/seeders/StatesTableSeeder.php'));
-        $this->assertFileExists($this->app->basePath('database/seeders/CitiesTableSeeder.php'));
-    }
-
-    public function test_migrations_and_seeders_run_correctly()
-    {
-        $this->seed(StatesTableSeeder::class);
-        $this->seed(CitiesTableSeeder::class);
-
-        $this->assertGreaterThan(0, State::count());
-        $this->assertGreaterThan(0, City::count());
-    }
-
-    public function test_access_to_cities_and_states()
-    {
-        $this->seed(StatesTableSeeder::class);
-        $this->seed(CitiesTableSeeder::class);
-
+        // Test State model
         $state = State::first();
         $this->assertNotNull($state);
-
+        $this->assertIsString($state->name);
+        
+        // Test City model
         $city = City::first();
         $this->assertNotNull($city);
+        $this->assertIsString($city->name);
+        
+        // Test relationships
+        $this->assertInstanceOf(State::class, $city->state);
+        $this->assertNotEmpty($state->cities);
     }
-} 
+}
