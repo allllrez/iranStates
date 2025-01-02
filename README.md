@@ -16,30 +16,19 @@
 composer require alrez/iran-states
 ```
 
-لاراول به صورت خودکار پکیج را شناسایی و نصب می‌کند. نیازی به ثبت دستی سرویس پروایدر نیست.
+سپس برای نصب جداول و داده‌های پایه:
 
-## انتشار فایل‌های پکیج
-
-برای انتشار همه فایل‌ها:
 ```bash
-php artisan vendor:publish --provider="Alrez\IranStates\IranStatesServiceProvider"
+php artisan iranStates:install
 ```
 
-یا انتشار به صورت جداگانه:
+این دستور به صورت خودکار مایگریشن‌ها را اجرا کرده و داده‌های پایه را در دیتابیس وارد می‌کند.
 
-برای فایل‌های اصلی (کانفیگ، کنترلرها و JSON):
+## انتشار فایل‌های پکیج (اختیاری)
+
+برای انتشار فایل کانفیگ:
 ```bash
 php artisan vendor:publish --tag=iran-states
-```
-
-برای مایگریشن‌ها:
-```bash
-php artisan vendor:publish --tag=migrations
-```
-
-برای سیدرها:
-```bash
-php artisan vendor:publish --tag=seeders
 ```
 
 ## استفاده
@@ -104,30 +93,19 @@ Install via Composer:
 composer require alrez/iran-states
 ```
 
-Laravel will automatically discover and register the package. No manual service provider registration is needed.
+Then install the tables and seed the data:
 
-## Publishing Package Files
-
-To publish all files:
 ```bash
-php artisan vendor:publish --provider="Alrez\IranStates\IranStatesServiceProvider"
+php artisan iranStates:install
 ```
 
-Or publish separately:
+This command will automatically run the migrations and seed the database with the initial data.
 
-For main files (config, controllers, and JSON):
+## Publishing Package Files (Optional)
+
+To publish the config file:
 ```bash
 php artisan vendor:publish --tag=iran-states
-```
-
-For migrations:
-```bash
-php artisan vendor:publish --tag=migrations
-```
-
-For seeders:
-```bash
-php artisan vendor:publish --tag=seeders
 ```
 
 ## Usage
