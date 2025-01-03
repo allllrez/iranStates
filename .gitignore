@@ -1,0 +1,10 @@
+/vendor/
+/.idea/
+.phpunit.result.cache
+composer.lock
+.php_cs.cache
+.php-cs-fixer.cache
+.phpunit.cache/
+coverage/
+.DS_Store
+Thumbs.db 
