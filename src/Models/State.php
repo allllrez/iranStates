@@ -4,6 +4,7 @@ namespace Alrez\IranStates\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Alrez\IranStates\Traits\InteractWithStates;
 
 /**
  * Class State
@@ -16,6 +17,8 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  */
 class State extends Model
 {
+    use InteractWithStates;
+
     protected $fillable = ['id', 'name', 'slug'];
     public $timestamps = false;
 
