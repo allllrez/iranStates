@@ -1,7 +1,6 @@
 {
     "name": "alrez/iran-states",
     "description": "A package for managing provinces and cities of Iran in Laravel.",
-    "version": "2.3.0",
     "type": "library",
     "minimum-stability": "stable",
     "prefer-stable": true,
@@ -43,6 +42,10 @@
         "php",
         "iran",
         "iran-states",
-        "iran-cities"
+        "iran-cities",
+        "laravel-12",
+        "php-8.2",
+        "iran-provinces",
+        "iran-package"
     ]
 }
