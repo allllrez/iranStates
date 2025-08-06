@@ -17,8 +17,7 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Alrez\\IranStates\\": "src/",
-            "Alrez\\IranStates\\Database\\": "src/database/"
+            "Alrez\\IranStates\\": "src/"
         }
     },
     "autoload-dev": {

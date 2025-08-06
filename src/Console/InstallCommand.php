@@ -42,14 +42,18 @@ class InstallCommand extends Command
             '--path' => 'vendor/alrez/iran-states/src/database/migrations'
         ]);
 
-        // Run seeders directly
+        // Run seeders using require_once to avoid autoload issues
         $this->info('Seeding database with states and cities...');
-        Artisan::call('db:seed', [
-            '--class' => 'Alrez\\IranStates\\Database\\Seeders\\StatesTableSeeder'
-        ]);
-        Artisan::call('db:seed', [
-            '--class' => 'Alrez\\IranStates\\Database\\Seeders\\CitiesTableSeeder'
-        ]);
+
+        // Load and run StatesTableSeeder
+        require_once __DIR__ . '/../database/seeders/StatesTableSeeder.php';
+        $statesSeeder = new \Alrez\IranStates\Database\Seeders\StatesTableSeeder();
+        $statesSeeder->run();
+
+        // Load and run CitiesTableSeeder
+        require_once __DIR__ . '/../database/seeders/CitiesTableSeeder.php';
+        $citiesSeeder = new \Alrez\IranStates\Database\Seeders\CitiesTableSeeder();
+        $citiesSeeder->run();
 
         $this->info('Iran States package installed successfully.');
     }
